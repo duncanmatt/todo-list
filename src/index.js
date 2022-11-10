@@ -11,13 +11,14 @@ class Task {
   }
 }
 
+// --DOM--
+const container = document.getElementById('container');
 function contentCreation() {
-  const container = document.createElement('div');
-  container.classList.add('container');
-
-  const topText = document.createElement('h1');
-  topText.innerHTML = 'Digital Agenda';
-  container.appendChild(topText);
+  container.innerHTML =`<h1>Date</h1>
+                        <section>
+                          <h2>Today's Objectives</h2>
+                        </section>
+                          `
 
 
   return container;
