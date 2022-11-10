@@ -1,13 +1,26 @@
 import _ from "lodash";
 import "./styles.css";
 
-function component() {
-  const element = document.createElement('div');
-
-  // Lodash, now imported by the script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  return element;
+class Task {
+  constructor(title, desc, deadline, priority, duration) {
+    this.title = title;
+    this.desc = desc;
+    this.deadline = deadline;
+    this.priority = priority;
+    this.duration = duration;
+  }
 }
 
-document.body.appendChild(component());
+function contentCreation() {
+  const container = document.createElement('div');
+  container.classList.add('container');
+
+  const topText = document.createElement('h1');
+  topText.innerHTML = 'Digital Agenda';
+  container.appendChild(topText);
+
+
+  return container;
+}
+
+document.body.appendChild(contentCreation());
