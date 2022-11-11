@@ -1,27 +1,27 @@
 import _ from "lodash";
 import "./styles.css";
 
-class Task {
-  constructor(title, desc, deadline, priority, duration) {
-    this.title = title;
-    this.desc = desc;
-    this.deadline = deadline;
-    this.priority = priority;
-    this.duration = duration;
-  }
-}
-
 // --DOM--
 const container = document.getElementById('container');
-function contentCreation() {
-  container.innerHTML =`<h1>Date</h1>
-                        <section>
-                          <h2>Today's Objectives</h2>
-                        </section>
-                          `
+const projects = document.querySelectorAll('.proj');
+const greeting = document.getElementById('greeting');
 
+function getDate() {
+  let today = new Date();
+  let day = String(today.getDate()).padStart(2, '0');
+  let month = String(today.getMonth() + 1).padStart(2, '0');
+  let year = today.getFullYear();
 
-  return container;
+  today = month + '/' + day + '/' + year;
+  greeting.textContent = today;
 }
+getDate();
 
-document.body.appendChild(contentCreation());
+
+
+
+
+
+// --logic--
+
+
