@@ -3,6 +3,11 @@
   --mid: rgba(19, 99, 223, 99%);
   --light: rgba(71, 181, 255, 99%);
   --lighter: rgba(223, 246, 255, 99%);
+  --shade: #e3e5e4;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -10,7 +15,7 @@ body {
   height: 100vh;
   margin: 0;
   font-family: 'Nunito';
-  color: rgba(75, 75, 75, 99%);
+  color: var(--dark);
 }
 
 #container {
@@ -53,4 +58,49 @@ body {
   text-align: center;
   font-size: 1.25rem;
 }
+
+.task-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.task-list li {
+  border: 1px solid var(--shade);
+  border-radius: 8px;
+  background-color: #f7f7f2;
+  display: flex;
+  flex-direction: column-reverse;
+  flex: 1;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.task-list > li > span {
+  text-align: center;
+}
+
+.task-list li:not(:last-of-type) {
+  border-bottom: 1px solid var(--shade);
+}
+
+.number {
+  justify-content: center;
+  font-size: 1rem;
+  height: max-content;
+  width: max-content;
+}
+
+.task-list .task-name {
+  margin: 0 20px 0 0;
+}
+
+.draggable {
+  background-color: var(--shade);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  flex: 1;
+} 
 
