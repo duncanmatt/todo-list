@@ -1,41 +1,49 @@
 import _ from "lodash";
 import "./styles.css";
 
-// --DOM--
-const container = document.getElementById('container');
-const projects = document.querySelectorAll('.proj');
 const greeting = document.getElementById('greeting');
-const lists = document.querySelectorAll('.task-list');
-const list1 = document.getElementById('proj1-list');
-const list2 = document.getElementById('proj2-list');
-const list3 = document.getElementById('proj3-list');
 
+const proj1Form = document.getElementById('proj1-form');
+const proj1List = document.getElementById('proj1-list');
+let proj1Tasks = [];
+
+// localStorage.setItem(new Task(title.value, desc.value);
+// --logic--
+
+addTask();
+function addTask() {
+  proj1Form.onsubmit = (e) => {
+    e.preventDefault();
+    const task = new FormData(e.target);
+    const newTask = Object.fromEntries(task.entries());
+    proj1Tasks.push(newTask);
+    console.log(proj1Tasks);
+    proj1Form.reset();
+    createList();
+  }
+  
+}
+
+function createList() {
+  for(let task of proj1Tasks) {
+    for(let prop of task) {
+      const newItem = document.createElement('li');
+      proj1List.appendChild(newItem)
+    
+      const itemInfo = document.createElement('p');
+      itemInfo.textContent = prop;
+      newItem.appendChild(itemInfo);
+    }
+  }
+}
+
+// --DOM--
 function getDate() {
   let today = new Date();
   let day = String(today.getDate()).padStart(2, '0');
   let month = String(today.getMonth() + 1).padStart(2, '0');
   let year = today.getFullYear();
-
   today = month + '/' + day + '/' + year;
   greeting.textContent = today;
 }
 getDate();
-
-
-
-
-
-
-// --logic--
-class Task {
-  constructor(title, desc, deadline, priority, duration) {
-    this.title = title;
-    this.desc = desc;
-    this.deadline = deadline;
-    this.priority = priority;
-    this.duration = duration;
-  }
-}
-
-const test = new Task('hello', 'dsjhaa', 'adshjfhk', 'aljlak', 'jad');
-console.log(test);

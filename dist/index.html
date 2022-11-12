@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" type="text">
 </head>
 <body>
   <div id="container">
@@ -14,25 +14,48 @@
     <section id="projects">
       <div class="proj" id="proj1">
         <h3>Personal Website</h3>
-          <p>
+          <p id="proj1-info">
             This web page will act as my resume and storage for my best projects.
           </p>
-          <ul class="task-list" id="proj1-list"></ul>
+          <ul class="task-list" id="proj1-list">
+            <button class="add-btn" id="add-btn-1">
+              Add Task
+            </button>
+          </ul>
       </div>
       <div class="proj" id="proj2">
         <h3>Fantasy Football Tool</h3>
           <p>
             An app that helps me decide which defense to stream in my lineup every week.
           </p>
-          <ul class="task-list" id="proj2-list"></ul>
+          <ul class="task-list" id="proj2-list">
+            <button class="add-btn" id="add-btn-2">
+              Add Task
+            </button>
+          </ul>
       </div>
       <div class="proj" id="proj3">
         <h3>Tic Tac Toe</h3>
           <p>
             The classic game played against a bot.
           </p>
-          <ul class="task-list" id="proj3-list"></ul>
+          <ul class="task-list" id="proj3-list">
+            <button class="add-btn" id="add-btn-3">
+              Add Task
+            </button>
+          </ul>
       </div>
+    </section>
+    <section id="temp">
+      <form id="proj1-form">
+        <label for="task"></label>
+        <input type="text" id="task-input" name="task" placeholder="task">
+        <br>
+        <label for="desc"></label>
+        <input type="text" id="desc-input" name="desc" placeholder="description">
+        <br>
+        <button type="submit" id="sub">Add Task</button>
+      </form>
     </section>
   </div>
   <script src="main.js"></script>
