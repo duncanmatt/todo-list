@@ -1,140 +1,43 @@
 import _ from "lodash";
 import "./styles.css";
 
+// date at the top
 const greeting = document.getElementById('greeting');
 
-const proj1Form = document.getElementById('proj1-form');
+// grab the form for inputting new task data
+const taskForm = document.getElementById('task-form');
+const taskTitle = document.getElementById('task-title-input');
+const taskInfo = document.getElementById('task-info-input');
+
+// UL for each project to append new task li
 const proj1List = document.getElementById('proj1-list');
-const titleInput1 = document.getElementById('proj1-title-input');
-const infoInput1 = document.getElementById('proj1-info-input');
+const proj2List = document.getElementById('proj2-list');
+const proj3List = document.getElementById('proj3-list');
 
-let proj1Tasks = [
-  'create two more projects',
-  'improve UI/UX',
-  'figure out hosting',
-];
-const proj1TaskItems = [];
+let tasks = new Map();
 
-let dragStartIndex;
-
-createTasks();
-function createTasks() {
-  [...proj1Tasks]
-    .forEach((task, index) => {
-      const listItem = document.createElement('li');
-
-      listItem.setAttribute('data-priority', index);
-
-      listItem.innerHTML = `
-        <span class="number">Priority: ${index+1}</span>
-        <div class="draggable" draggable="true">
-          <p class="task-name">${task}</p>
-          <i class="fa-solid fa-trash"></i>
-        </div>
-      `;
-
-      proj1TaskItems.push(listItem);
-
-      proj1List.appendChild(listItem);
-    });
-
+// *** CLASSES THEN STORE IN LOCALSTORAGE ***
+class Task {
+  constructor(name, info) {
+    this.name = name;
+    this.info = info;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // --logic--
-
-/*
 addTask();
 function addTask() {
-  proj1Form.onsubmit = (e) => {
+  taskForm.onsubmit = (e) => {
     e.preventDefault();
-    const task = new FormData(e.target);
-    const newTask = Object.fromEntries(task.entries());
-    proj1Tasks.push(newTask);
-    
-    const newItem = document.createElement('li');
-    newItem.innerHTML = `<p>${titleInput1.value}<br>${infoInput1.value}</p>`;
-    proj1List.appendChild(newItem);
-    proj1Form.reset();
+    const newTask = new Task(taskTitle.value, taskInfo.value);
+    tasks[newTask.name] = newTask.info;
+    console.log(tasks);
   }
   
+
 }
-*/
+
 
 // --DOM--
 function getDate() {
