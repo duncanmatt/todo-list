@@ -12,7 +12,7 @@
   <div id="container">
     <h1 id="greeting"></h1>
     <section id="projects">
-      <div class="proj" id="proj1">
+      <div class="proj" class="selected" id="proj1">
         <h3>Personal Website</h3>
           <p id="proj1-info">
             This web page will act as my resume and storage for my best projects.
@@ -48,8 +48,15 @@
     </section>
     <section id="new-task">
       <form id="task-form">
-        <label for="project"></label>
-        <input type="text" id="task-proj-input" name="project" placeholder="project">
+        <p>Select a project to add a task</p>
+        <span>
+          <input type="radio" id="pw-select" name="project" value="1" required>
+          <label for="pw-select"></label>
+          <input type="radio" id="ff-select" name="project" value="2" required>
+          <label for="ff-select"></label>
+          <input type="radio" id="ttt-select" name="project" value="3" required>
+          <label for="ttt-select"></label>
+        </span>
         <br>
         <label for="name"></label>
         <input type="text" id="task-title-input" name="name" placeholder="task">

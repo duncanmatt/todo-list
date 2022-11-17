@@ -14,25 +14,94 @@ const proj1List = document.getElementById('proj1-list');
 const proj2List = document.getElementById('proj2-list');
 const proj3List = document.getElementById('proj3-list');
 
-let tasks = new Map();
+// project cards
+const proj1 = document.getElementById('proj1');
+const proj2 = document.getElementById('proj2');
+const proj3 = document.getElementById('proj3');
 
 // *** CLASSES THEN STORE IN LOCALSTORAGE ***
 class Task {
-  constructor(name, info) {
-    this.name = name;
+  constructor(title, info) {
+    this.project = null;
+    this.title = title;
     this.info = info;
   }
 }
 
+class HashTable {
+  constructor(size=53) {
+    this.keyMap = new Array(size);
+  }
+
+  _hash(key) {
+    let total = 0;
+    let WEIRD_PRIME = 31;
+    for (let i = 0; i < Math.min(key.length, 100); i++) {
+      let char = key[i];
+      let value = char.charCodeAt(0) - 96;
+      total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+    }
+    return total;
+  }
+  set(key, val) {
+    let index = this._hash(key);
+    if (!this.keyMap[index]) {
+      this.keyMap[index] = [];
+    }
+    this.keyMap[index].push([key, val]);
+  }
+  get(key) {
+    let index = this._hash(key);
+    if (this.keyMap[index]) {
+      for (let i = 0; i < this.keyMap[index].length; i++){
+        if (this.keyMap[index][i][0] === key) {
+          return this.keyMap[index][i][1];
+        }
+      }
+    }
+    return undefined;
+  }
+  values() {
+    let valuesArr = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if(!valuesArr.includes(this.keyMap[i][j][1])) {
+            valuesArr.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+    }
+    return valuesArr;
+  }
+  keys() {
+    let keysArr = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if(!keysArr.includes(this.keyMap[i][j][0])) {
+            keysArr.push(this.keyMap[i][j][0]);
+          }
+        }
+      }
+    }
+    return keysArr;
+  }
+}
 
 // --logic--
+let proj1Tasks = new HashTable();
+let proj2Tasks = new HashTable();
+let proj3Tasks = new HashTable();
+
 addTask();
 function addTask() {
   taskForm.onsubmit = (e) => {
     e.preventDefault();
     const newTask = new Task(taskTitle.value, taskInfo.value);
-    tasks[newTask.name] = newTask.info;
-    console.log(tasks);
+
+    proj1Tasks.set(newTask.title, newTask.info);
+    console.log(proj1Tasks);
   }
   
 
@@ -49,3 +118,36 @@ function getDate() {
   greeting.textContent = today;
 }
 getDate();
+
+// if project input is selected: illuminate corresponding project with border-box
+const projSelectors = document.querySelectorAll('[name=project]');
+
+function formFeedback() {
+  if (document.getElementById('pw-select').checked) {
+    proj1.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+    proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+  }
+  if (document.getElementById('ff-select').checked) {
+    proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj2.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+    proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+  }
+  if(document.getElementById('ttt-select').checked) {
+    proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj3.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+  }
+}
+
+projSelectors.forEach((selector) => {
+  selector.addEventListener('click', () => {
+    formFeedback();
+  });
+});
+
+
+
+
+
+

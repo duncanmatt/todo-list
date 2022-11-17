@@ -77,10 +77,6 @@ body {
   flex: 1;
 }
 
-.item {
-  
-}
-
 .task-list > li > span {
   margin-left: 0.5rem;
 }
@@ -107,20 +103,26 @@ body {
   flex: 1;
 } 
 
-#forms {
+#new-task {
+  border: 1px solid var(--dark);
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  justify-content: space-evenly;
-  gap: 2rem;
-  margin: 0;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
 }
 
-#proj-1-form {
-  justify-content: flex-start;
+#new-task > span {
+  display: flex;
+  justify-content: center;
 }
 
-#proj-3-form {
-  padding-left: 2rem;
+#task-form > input[type=radio] {
+ 
 }
+
+
+
 
