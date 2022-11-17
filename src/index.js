@@ -134,33 +134,48 @@ let proj2Tasks = new HashTable();
 let proj3Tasks = new HashTable();
 
 function createProj1Items() {
-  let itemContent = proj1Tasks.values();
-  itemContent.forEach((content) => {
-    let item = document.createElement('li');
-    item.textContent = content;
-    item.classList.add('item');
-    proj1List.appendChild(item);
-  });
+  let itemTitles = proj1Tasks.keys();
+  let itemInfo = proj1Tasks.values();
+  
+  for(let title of itemTitles) {
+    itemInfo.forEach((content) => {
+      let item = document.createElement('li');
+      item.innerHTML = `<h4>${title}</h4>
+                        <p>${content}</p>`;
+      item.classList.add('item');
+      proj1List.appendChild(item);
+    });
+  }
 }
 
 function createProj2Items() {
-  let itemContent = proj2Tasks.values();
-  itemContent.forEach((content) => {
-    let item = document.createElement('li');
-    item.textContent = content;
-    item.classList.add('item');
-    proj2List.appendChild(item);
-  });
+  let itemTitles = proj2Tasks.keys();
+  let itemInfo = proj2Tasks.values();
+
+  for(let title of itemTitles) {
+    itemInfo.forEach((content) => {
+      let item = document.createElement('li');
+      item.innerHTML = `<h4>${title}</h4>
+                        <p>${content}</p>`;
+      item.classList.add('item');
+      proj2List.appendChild(item);
+    });
+  }
 }
 
 function createProj3Items() {
-  let itemContent = proj3Tasks.values();
-  itemContent.forEach((content) => {
-    let item = document.createElement('li');
-    item.textContent = content;
-    item.classList.add('item');
-    proj3List.appendChild(item);
-  });
+  let itemTitles = proj3Tasks.keys();
+  let itemInfo = proj3Tasks.values();
+
+  for(let title of itemTitles) {
+    itemInfo.forEach((content) => {
+      let item = document.createElement('li');
+      item.innerHTML = `<h4>${title}</h4>
+                        <p>${content}</p>`;
+      item.classList.add('item');
+      proj3List.appendChild(item);
+    });
+  }
 }
 
 addTask();
@@ -172,14 +187,17 @@ function addTask() {
     if (document.getElementById('pw-select').checked) {
       proj1Tasks.set(newTask.title, newTask.info);
       createProj1Items();
+      taskForm.reset();
     }
     if(document.getElementById('ff-select').checked) {
       proj2Tasks.set(newTask.title, newTask.info);
       createProj2Items();
+      taskForm.reset();
     }
     if(document.getElementById('ttt-select').checked) {
       proj3Tasks.set(newTask.title, newTask.info);
       createProj3Items();
+      taskForm.reset();
     }
 
   }

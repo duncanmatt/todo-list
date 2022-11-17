@@ -88,15 +88,16 @@ body {
 .task-list li:not(:last-of-type) {
   border-bottom: 1px solid var(--shade);
 }
-
-.task-list .task-name {
-  margin: 0.25rem;
-  font-weight: bold;
-}
-
 .item {
   text-align: center;
-  font-weight: bold;
+}
+
+.item > h4 {
+  margin: 0;
+}
+
+.item > p {
+  margin: 0;
 }
 
 .draggable {
