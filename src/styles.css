@@ -39,7 +39,7 @@ body {
   grid-auto-columns: 1fr;
   justify-content: space-evenly;
   gap: 1rem;
-  margin: 1rem;
+  margin: 2rem;
 }
 
 .proj {
@@ -104,7 +104,7 @@ body {
 } 
 
 #new-task {
-  border: 1px solid var(--dark);
+  border: 1px solid var(--mid);
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -117,6 +117,10 @@ body {
 #new-task > span {
   display: flex;
   justify-content: center;
+}
+
+.add-btn {
+  border: none;
 }
 
 #task-form > input[type=radio] {

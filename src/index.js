@@ -94,14 +94,28 @@ let proj1Tasks = new HashTable();
 let proj2Tasks = new HashTable();
 let proj3Tasks = new HashTable();
 
+function createTaskItems() {
+  let temp = proj1Tasks.values();
+  console.log(temp);
+}
+
 addTask();
 function addTask() {
   taskForm.onsubmit = (e) => {
     e.preventDefault();
     const newTask = new Task(taskTitle.value, taskInfo.value);
 
-    proj1Tasks.set(newTask.title, newTask.info);
-    console.log(proj1Tasks);
+    if (document.getElementById('pw-select').checked) {
+      proj1Tasks.set(newTask.title, newTask.info);
+      createTaskItems();
+    }
+    if(document.getElementById('ff-select').checked) {
+      proj2Tasks.set(newTask.title, newTask.info);
+    }
+    if(document.getElementById('ttt-select').checked) {
+      proj3Tasks.set(newTask.title, newTask.info)
+    }
+
   }
   
 
@@ -109,6 +123,7 @@ function addTask() {
 
 
 // --DOM--
+
 function getDate() {
   let today = new Date();
   let day = String(today.getDate()).padStart(2, '0');
