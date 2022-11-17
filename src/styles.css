@@ -94,6 +94,11 @@ body {
   font-weight: bold;
 }
 
+.item {
+  text-align: center;
+  font-weight: bold;
+}
+
 .draggable {
   cursor: pointer;
   display: flex;

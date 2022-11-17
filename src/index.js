@@ -19,10 +19,50 @@ const proj1 = document.getElementById('proj1');
 const proj2 = document.getElementById('proj2');
 const proj3 = document.getElementById('proj3');
 
+// --DOM--
+function getDate() {
+  let today = new Date();
+  let day = String(today.getDate()).padStart(2, '0');
+  let month = String(today.getMonth() + 1).padStart(2, '0');
+  let year = today.getFullYear();
+  today = month + '/' + day + '/' + year;
+  greeting.textContent = today;
+}
+getDate();
+
+// if project input is selected: illuminate corresponding project with border-box
+const projSelectors = document.querySelectorAll('[name=project]');
+
+function formFeedback() {
+  if (document.getElementById('pw-select').checked) {
+    proj1.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+    proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+  }
+  if (document.getElementById('ff-select').checked) {
+    proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj2.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+    proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+  }
+  if(document.getElementById('ttt-select').checked) {
+    proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj3.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+  }
+}
+
+projSelectors.forEach((selector) => {
+  selector.addEventListener('click', () => {
+    formFeedback();
+  });
+});
+
+//--Logic--
+
+
 // *** CLASSES THEN STORE IN LOCALSTORAGE ***
 class Task {
   constructor(title, info) {
-    this.project = null;
     this.title = title;
     this.info = info;
   }
@@ -89,14 +129,38 @@ class HashTable {
   }
 }
 
-// --logic--
 let proj1Tasks = new HashTable();
 let proj2Tasks = new HashTable();
 let proj3Tasks = new HashTable();
 
-function createTaskItems() {
-  let temp = proj1Tasks.values();
-  console.log(temp);
+function createProj1Items() {
+  let itemContent = proj1Tasks.values();
+  itemContent.forEach((content) => {
+    let item = document.createElement('li');
+    item.textContent = content;
+    item.classList.add('item');
+    proj1List.appendChild(item);
+  });
+}
+
+function createProj2Items() {
+  let itemContent = proj2Tasks.values();
+  itemContent.forEach((content) => {
+    let item = document.createElement('li');
+    item.textContent = content;
+    item.classList.add('item');
+    proj2List.appendChild(item);
+  });
+}
+
+function createProj3Items() {
+  let itemContent = proj3Tasks.values();
+  itemContent.forEach((content) => {
+    let item = document.createElement('li');
+    item.textContent = content;
+    item.classList.add('item');
+    proj3List.appendChild(item);
+  });
 }
 
 addTask();
@@ -107,13 +171,15 @@ function addTask() {
 
     if (document.getElementById('pw-select').checked) {
       proj1Tasks.set(newTask.title, newTask.info);
-      createTaskItems();
+      createProj1Items();
     }
     if(document.getElementById('ff-select').checked) {
       proj2Tasks.set(newTask.title, newTask.info);
+      createProj2Items();
     }
     if(document.getElementById('ttt-select').checked) {
-      proj3Tasks.set(newTask.title, newTask.info)
+      proj3Tasks.set(newTask.title, newTask.info);
+      createProj3Items();
     }
 
   }
@@ -122,44 +188,6 @@ function addTask() {
 }
 
 
-// --DOM--
-
-function getDate() {
-  let today = new Date();
-  let day = String(today.getDate()).padStart(2, '0');
-  let month = String(today.getMonth() + 1).padStart(2, '0');
-  let year = today.getFullYear();
-  today = month + '/' + day + '/' + year;
-  greeting.textContent = today;
-}
-getDate();
-
-// if project input is selected: illuminate corresponding project with border-box
-const projSelectors = document.querySelectorAll('[name=project]');
-
-function formFeedback() {
-  if (document.getElementById('pw-select').checked) {
-    proj1.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
-    proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-    proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-  }
-  if (document.getElementById('ff-select').checked) {
-    proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-    proj2.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
-    proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-  }
-  if(document.getElementById('ttt-select').checked) {
-    proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-    proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-    proj3.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
-  }
-}
-
-projSelectors.forEach((selector) => {
-  selector.addEventListener('click', () => {
-    formFeedback();
-  });
-});
 
 
 
