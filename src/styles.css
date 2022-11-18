@@ -134,9 +134,8 @@ body {
   margin: 1rem 4rem 1rem 4rem;
 }
 
-#new-task-btn {
-  display: flex;
-  justify-content: center;
+#task-form > input[type=image] {
+  place-self: center;
 }
 
 
