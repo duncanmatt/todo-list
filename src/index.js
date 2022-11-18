@@ -144,6 +144,7 @@ function createProj1Items() {
       proj1List.appendChild(item);
     });
   }
+  
 }
 
 function createProj2Items() {
@@ -184,18 +185,23 @@ function addTask() {
 
     if (document.getElementById('pw-select').checked) {
       proj1Tasks.set(newTask.title, newTask.info);
+      localStorage.setItem('taskItems1', JSON.stringify(proj1List));
       createProj1Items();
       taskForm.reset();
-    }
-    if(document.getElementById('ff-select').checked) {
+    } 
+    else if(document.getElementById('ff-select').checked) {
       proj2Tasks.set(newTask.title, newTask.info);
+      localStorage.setItem('taskItems2', JSON.stringify(proj2List));
       createProj2Items();
       taskForm.reset();
     }
-    if(document.getElementById('ttt-select').checked) {
+    else if(document.getElementById('ttt-select').checked) {
       proj3Tasks.set(newTask.title, newTask.info);
+      localStorage.setItem('taskItems3', JSON.stringify(proj3List));
       createProj3Items();
       taskForm.reset();
+    } else {
+      console.log('TASK DID NOT SUBMIT');
     }
   }
 }
