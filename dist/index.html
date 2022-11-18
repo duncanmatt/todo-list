@@ -36,23 +36,23 @@
     </section>
     <section id="new-task">
       <form id="task-form">
-        <p>Select a project to add a task</p>
-        <span>
+          <legend>Select a project to add task</legend>
+          <span>
           <input type="radio" id="pw-select" name="project" value="1" required>
           <label for="pw-select"></label>
           <input type="radio" id="ff-select" name="project" value="2" required>
           <label for="ff-select"></label>
           <input type="radio" id="ttt-select" name="project" value="3" required>
           <label for="ttt-select"></label>
-        </span>
+          </span>
         <br>
         <label for="name"></label>
         <input type="text" id="task-title-input" name="name" placeholder="task">
-        <br>
         <label for="info"></label>
         <input type="text" id="task-info-input" name="info" placeholder="info">
-        <br>
-        <button type="submit" class="form-submut" id="proj1-sub">Add</button>
+        <span>
+          <i class="fa-regular fa-rectangle-history-circle-plus"></i>
+        </span>
       </form>
     </section>
   </div>

@@ -31,6 +31,7 @@ body {
 #greeting {
   color: var(--dark);
   padding: 1rem;
+
 }
 
 #projects {
@@ -71,7 +72,7 @@ body {
 .task-list li {
   border: 1px solid var(--shade);
   border-radius: 8px;
-  background-color: #f7f7f2;
+  background-color: var(--light);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -87,9 +88,6 @@ body {
 
 .task-list li:not(:last-of-type) {
   border-bottom: 1px solid var(--shade);
-}
-.item {
-  text-align: center;
 }
 
 .item > h4 {
@@ -110,27 +108,43 @@ body {
 } 
 
 #new-task {
-  border: 1px solid var(--mid);
+
+}
+
+#task-form {
+  background-color: #f7f7f2;
+  border-radius: 12px;
   display: grid;
-  grid-auto-flow: column;
+  grid-auto-flow: row;
   grid-auto-columns: 1fr;
   justify-content: center;
-  gap: 1rem;
   margin-bottom: 1rem;
-  padding: 1rem;
+  
 }
 
-#new-task > span {
+#task-form > legend {
+  text-align: center;
+  margin: 0;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+#task-form > span {
+  margin: 0 3rem 0 3rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
-.add-btn {
-  border: none;
+#task-form > input[type=text] {
+
+}
+
+#task-form > button {
+  margin: 1rem 4rem 1rem 4rem;
 }
 
 #task-form > input[type=radio] {
- 
+  
 }
 
 

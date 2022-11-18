@@ -58,8 +58,6 @@ projSelectors.forEach((selector) => {
 });
 
 //--Logic--
-
-
 // *** CLASSES THEN STORE IN LOCALSTORAGE ***
 class Task {
   constructor(title, info) {
@@ -199,10 +197,7 @@ function addTask() {
       createProj3Items();
       taskForm.reset();
     }
-
   }
-  
-
 }
 
 
