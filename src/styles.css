@@ -98,22 +98,9 @@ body {
   margin: 0;
 }
 
-.draggable {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0;
-  flex: 1;
-} 
-
-#new-task {
-
-}
-
 #task-form {
-  background-color: #f7f7f2;
-  border-radius: 12px;
+  background-color: rgba(144,144,144,0.35);
+  border-radius: 6px;
   display: grid;
   grid-auto-flow: row;
   grid-auto-columns: 1fr;
@@ -136,17 +123,20 @@ body {
 }
 
 #task-form > input[type=text] {
-
+  padding: 0.25rem;
+  margin: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border: none;
+  border-radius: 8px;
+ 
 }
 
 #task-form > button {
   margin: 1rem 4rem 1rem 4rem;
 }
 
-#task-form > input[type=radio] {
-  
+#new-task-btn {
+  display: flex;
+  justify-content: center;
 }
-
-
 
 
