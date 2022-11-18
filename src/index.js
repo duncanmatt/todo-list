@@ -141,7 +141,7 @@ function createProj1Items() {
       item.innerHTML = `<h4>${title}</h4>
                         <p>${content}</p>`;
       item.classList.add('item');
-      proj1List.appendChild(item);
+      proj1List.appendChild(item)
     });
   }
   
@@ -185,19 +185,18 @@ function addTask() {
 
     if (document.getElementById('pw-select').checked) {
       proj1Tasks.set(newTask.title, newTask.info);
-      localStorage.setItem('taskItems1', JSON.stringify(proj1List));
-      createProj1Items();
+      localStorage.setItem('task1Items', JSON.stringify(proj1Tasks));
+      let taskItems = JSON.parse(localStorage.getItem('task1Items'));
+      console.log(taskItems);
       taskForm.reset();
     } 
     else if(document.getElementById('ff-select').checked) {
       proj2Tasks.set(newTask.title, newTask.info);
-      localStorage.setItem('taskItems2', JSON.stringify(proj2List));
       createProj2Items();
       taskForm.reset();
     }
     else if(document.getElementById('ttt-select').checked) {
       proj3Tasks.set(newTask.title, newTask.info);
-      localStorage.setItem('taskItems3', JSON.stringify(proj3List));
       createProj3Items();
       taskForm.reset();
     } else {
