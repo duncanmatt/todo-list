@@ -4,11 +4,6 @@ import "./styles.css";
 // date at the top
 const greeting = document.getElementById('greeting');
 
-// grab the form for inputting new task data
-const taskForm = document.getElementById('task-form');
-const taskTitle = document.getElementById('task-title-input');
-const taskInfo = document.getElementById('task-info-input');
-
 // UL for each project to append new task li
 const proj1List = document.getElementById('proj1-list');
 const proj2List = document.getElementById('proj2-list');
@@ -19,27 +14,49 @@ const proj1 = document.getElementById('proj1');
 const proj2 = document.getElementById('proj2');
 const proj3 = document.getElementById('proj3');
 
-class Node {
-  constructor(val) {
-    this.val = val;
-    
+class Task {
+  constructor(title, info, listNum) {
+    this.title = title;
+    this.info = info;
+    this.listNum = listNum;
   }
+  // store()
 }
+let taskItems = [];
+window.addEventListener('load', () => {
+  const taskForm = document.getElementById('task-form');
+  const taskTitle = document.getElementById('task-title-input');
+  const taskInfo = document.getElementById('task-info-input');
+  taskItems = JSON.parse(localStorage.getItem('taskItems')) || [];
 
-let proj1Tasks = new Array();
-let proj2Tasks = new Array();
-let proj3Tasks = new Array();
-printProj1List();
-function printProj1List() {
-  Object.keys(localStorage).forEach(function(key){
-    console.log(localStorage.getItem(key));
- });
-}
-
+  taskForm.onsubmit = (e) => {
+    e.preventDefault();
+    if (document.getElementById('pw-select').checked) {
+      let newTask = new Task(taskTitle.value, taskInfo.value, 1);
+      localStorage.setItem(`${taskTitle.value}`, JSON.stringify(newTask));
+      taskItems.push(newTask);
+      taskForm.reset();
+    } 
+    else if(document.getElementById('ff-select').checked) {
+      let newTask = new Task(taskTitle.value, taskInfo.value, 2);
+      localStorage.setItem(`${taskTitle.value}`, JSON.stringify(newTask));
+      taskItems.push(newTask);
+      taskForm.reset();
+    }
+    else if(document.getElementById('ttt-select').checked) {
+      let newTask = new Task(taskTitle.value, taskInfo.value, 3);
+      localStorage.setItem(`${taskTitle.value}`, JSON.stringify(newTask));
+      taskItems.push(newTask);
+      taskForm.reset();
+    } else {
+      formFeedback();
+      console.log('TASK DID NOT SUBMIT');
+    }
+    console.log(taskItems);
+  }
+});
 // --DOM--
-//window.addEventListener('load', () => {
-  //proj1Tasks.print()
-//});
+
 
 function getDate() {
   let today = new Date();
@@ -84,42 +101,7 @@ projSelectors.forEach((selector) => {
 });
 
 //--Logic--
-addTask();
-function addTask() {
-  taskForm.onsubmit = (e) => {
-    e.preventDefault();
-   
 
-    if (document.getElementById('pw-select').checked) {
-      proj1Tasks.push(`${taskTitle.value}  ${taskInfo.value}`);
-      localStorage.setItem('task1Items', JSON.stringify(proj1Tasks));
-      let taskItems = JSON.parse(localStorage.getItem('task1Items'));
-      console.log(taskItems);
-
-      taskForm.reset();
-    } 
-    else if(document.getElementById('ff-select').checked) {
-      proj2Tasks.push(`${taskTitle.value}${taskInfo.value}`);
-      localStorage.setItem('task2Items', JSON.stringify(proj2Tasks));
-      let taskItems = JSON.parse(localStorage.getItem('task2Items'));
-      console.log(taskItems);
-
-      taskForm.reset();
-    }
-    else if(document.getElementById('ttt-select').checked) {
-      proj3Tasks.push(`${taskTitle.value}${taskInfo.value}`);
-      localStorage.setItem('task3Items', JSON.stringify(proj3Tasks));
-      let taskItems = JSON.parse(localStorage.getItem('task3Items'));
-      console.log(taskItems);
-  
-      taskForm.reset();
-
-    } else {
-      formFeedback();
-      console.log('TASK DID NOT SUBMIT');
-    }
-  }
-}
 
 
 
