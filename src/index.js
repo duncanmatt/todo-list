@@ -19,7 +19,28 @@ const proj1 = document.getElementById('proj1');
 const proj2 = document.getElementById('proj2');
 const proj3 = document.getElementById('proj3');
 
+class Node {
+  constructor(val) {
+    this.val = val;
+    
+  }
+}
+
+let proj1Tasks = new Array();
+let proj2Tasks = new Array();
+let proj3Tasks = new Array();
+printProj1List();
+function printProj1List() {
+  Object.keys(localStorage).forEach(function(key){
+    console.log(localStorage.getItem(key));
+ });
+}
+
 // --DOM--
+//window.addEventListener('load', () => {
+  //proj1Tasks.print()
+//});
+
 function getDate() {
   let today = new Date();
   let day = String(today.getDate()).padStart(2, '0');
@@ -63,57 +84,6 @@ projSelectors.forEach((selector) => {
 });
 
 //--Logic--
-// *** CLASSES THEN STORE IN LOCALSTORAGE ***
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-  }
-}
-
-class TaskList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-  }
-  push(task){
-    var newTask = new Node(task);
-    if(!this.head){
-        this.head = newTask;
-        this.tail = this.head;
-    } else {
-        this.tail.next = newTask;
-        this.tail = newTask;
-    }
-    this.length++;
-    return this;
-  }
-  pop(){
-    if(!this.head) return undefined;
-    var current = this.head;
-    var newTail = current;
-    while(current.next) {
-      newTail = current;
-      current = current.next;
-    }
-    this.tail = newTail;
-    this.tail.next = null;
-    this.length--;
-    if(this.length === 0){
-        this.head = null;
-        this.tail = null;
-    }
-    return current;
-  }
-}
-
-let proj1Tasks = new TaskList();
-let proj2Tasks = new TaskList();
-let proj3Tasks = new TaskList();
-
-
-
 addTask();
 function addTask() {
   taskForm.onsubmit = (e) => {
@@ -121,20 +91,26 @@ function addTask() {
    
 
     if (document.getElementById('pw-select').checked) {
-      proj1Tasks.push(taskTitle.value);
+      proj1Tasks.push(`${taskTitle.value}  ${taskInfo.value}`);
       localStorage.setItem('task1Items', JSON.stringify(proj1Tasks));
       let taskItems = JSON.parse(localStorage.getItem('task1Items'));
-         
       console.log(taskItems);
+
       taskForm.reset();
     } 
     else if(document.getElementById('ff-select').checked) {
-      proj2Tasks.set(newTask.title, newTask.info);
-      
+      proj2Tasks.push(`${taskTitle.value}${taskInfo.value}`);
+      localStorage.setItem('task2Items', JSON.stringify(proj2Tasks));
+      let taskItems = JSON.parse(localStorage.getItem('task2Items'));
+      console.log(taskItems);
+
       taskForm.reset();
     }
     else if(document.getElementById('ttt-select').checked) {
-      proj3Tasks.set(newTask.title, newTask.info);
+      proj3Tasks.push(`${taskTitle.value}${taskInfo.value}`);
+      localStorage.setItem('task3Items', JSON.stringify(proj3Tasks));
+      let taskItems = JSON.parse(localStorage.getItem('task3Items'));
+      console.log(taskItems);
   
       taskForm.reset();
 
