@@ -39,15 +39,20 @@ function formFeedback() {
     proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
     proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
   }
-  if (document.getElementById('ff-select').checked) {
+  else if (document.getElementById('ff-select').checked) {
     proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
     proj2.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
     proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
   }
-  if(document.getElementById('ttt-select').checked) {
+  else if(document.getElementById('ttt-select').checked) {
     proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
     proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
     proj3.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+  }
+  else {
+    proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
+    proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
   }
 }
 
@@ -59,147 +64,82 @@ projSelectors.forEach((selector) => {
 
 //--Logic--
 // *** CLASSES THEN STORE IN LOCALSTORAGE ***
-class Task {
-  constructor(title, info) {
-    this.title = title;
-    this.info = info;
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
   }
 }
 
-class HashTable {
-  constructor(size=53) {
-    this.keyMap = new Array(size);
+class TaskList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
-
-  _hash(key) {
-    let total = 0;
-    let WEIRD_PRIME = 31;
-    for (let i = 0; i < Math.min(key.length, 100); i++) {
-      let char = key[i];
-      let value = char.charCodeAt(0) - 96;
-      total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+  push(task){
+    var newTask = new Node(task);
+    if(!this.head){
+        this.head = newTask;
+        this.tail = this.head;
+    } else {
+        this.tail.next = newTask;
+        this.tail = newTask;
     }
-    return total;
+    this.length++;
+    return this;
   }
-  set(key, val) {
-    let index = this._hash(key);
-    if (!this.keyMap[index]) {
-      this.keyMap[index] = [];
+  pop(){
+    if(!this.head) return undefined;
+    var current = this.head;
+    var newTail = current;
+    while(current.next) {
+      newTail = current;
+      current = current.next;
     }
-    this.keyMap[index].push([key, val]);
-  }
-  get(key) {
-    let index = this._hash(key);
-    if (this.keyMap[index]) {
-      for (let i = 0; i < this.keyMap[index].length; i++){
-        if (this.keyMap[index][i][0] === key) {
-          return this.keyMap[index][i][1];
-        }
-      }
+    this.tail = newTail;
+    this.tail.next = null;
+    this.length--;
+    if(this.length === 0){
+        this.head = null;
+        this.tail = null;
     }
-    return undefined;
-  }
-  values() {
-    let valuesArr = [];
-    for (let i = 0; i < this.keyMap.length; i++) {
-      if (this.keyMap[i]) {
-        for (let j = 0; j < this.keyMap[i].length; j++) {
-          if(!valuesArr.includes(this.keyMap[i][j][1])) {
-            valuesArr.push(this.keyMap[i][j][1]);
-          }
-        }
-      }
-    }
-    return valuesArr;
-  }
-  keys() {
-    let keysArr = [];
-    for (let i = 0; i < this.keyMap.length; i++) {
-      if (this.keyMap[i]) {
-        for (let j = 0; j < this.keyMap[i].length; j++) {
-          if(!keysArr.includes(this.keyMap[i][j][0])) {
-            keysArr.push(this.keyMap[i][j][0]);
-          }
-        }
-      }
-    }
-    return keysArr;
+    return current;
   }
 }
 
-let proj1Tasks = new HashTable();
-let proj2Tasks = new HashTable();
-let proj3Tasks = new HashTable();
+let proj1Tasks = new TaskList();
+let proj2Tasks = new TaskList();
+let proj3Tasks = new TaskList();
 
-function createProj1Items() {
-  let itemTitles = proj1Tasks.keys();
-  let itemInfo = proj1Tasks.values();
-  
-  for(let title of itemTitles) {
-    itemInfo.forEach((content) => {
-      let item = document.createElement('li');
-      item.innerHTML = `<h4>${title}</h4>
-                        <p>${content}</p>`;
-      item.classList.add('item');
-      proj1List.appendChild(item)
-    });
-  }
-  
-}
 
-function createProj2Items() {
-  let itemTitles = proj2Tasks.keys();
-  let itemInfo = proj2Tasks.values();
-
-  for(let title of itemTitles) {
-    itemInfo.forEach((content) => {
-      let item = document.createElement('li');
-      item.innerHTML = `<h4>${title}</h4>
-                        <p>${content}</p>`;
-      item.classList.add('item');
-      proj2List.appendChild(item);
-    });
-  }
-}
-
-function createProj3Items() {
-  let itemTitles = proj3Tasks.keys();
-  let itemInfo = proj3Tasks.values();
-
-  for(let title of itemTitles) {
-    itemInfo.forEach((content) => {
-      let item = document.createElement('li');
-      item.innerHTML = `<h4>${title}</h4>
-                        <p>${content}</p>`;
-      item.classList.add('item');
-      proj3List.appendChild(item);
-    });
-  }
-}
 
 addTask();
 function addTask() {
   taskForm.onsubmit = (e) => {
     e.preventDefault();
-    const newTask = new Task(taskTitle.value, taskInfo.value);
+   
 
     if (document.getElementById('pw-select').checked) {
-      proj1Tasks.set(newTask.title, newTask.info);
+      proj1Tasks.push(taskTitle.value);
       localStorage.setItem('task1Items', JSON.stringify(proj1Tasks));
       let taskItems = JSON.parse(localStorage.getItem('task1Items'));
+         
       console.log(taskItems);
       taskForm.reset();
     } 
     else if(document.getElementById('ff-select').checked) {
       proj2Tasks.set(newTask.title, newTask.info);
-      createProj2Items();
+      
       taskForm.reset();
     }
     else if(document.getElementById('ttt-select').checked) {
       proj3Tasks.set(newTask.title, newTask.info);
-      createProj3Items();
+  
       taskForm.reset();
+
     } else {
+      formFeedback();
       console.log('TASK DID NOT SUBMIT');
     }
   }

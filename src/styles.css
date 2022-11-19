@@ -135,7 +135,8 @@ body {
 }
 
 #task-form > input[type=image] {
-  place-self: center;
+  margin-right: 1rem;
+  place-self: flex-end;
 }
 
 
