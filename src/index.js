@@ -52,8 +52,8 @@ function createTaskItems() {
                           <h4>${taskKey}</h4>
                           <h6>${taskContent}</h6>
                         `;
-    newItem.classList.add('item');
     taskList.appendChild(newItem);
+    newItem.classList.add('item');
   }
 }
 
@@ -73,19 +73,19 @@ const projSelectors = document.querySelectorAll('[name=project]');
 
 function formFeedback() {
   if (document.getElementById('pw-select').checked) {
-    proj1.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+    proj1.style.boxShadow = '0 10px 20px var(--lighter), 0 6px 6px var(--mid)';
     proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
     proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
   }
   else if (document.getElementById('ff-select').checked) {
     proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-    proj2.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+    proj2.style.boxShadow = '0 10px 20px var(--lighter), 0 6px 6px var(--mid)';
     proj3.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
   }
   else if(document.getElementById('ttt-select').checked) {
     proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
     proj2.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
-    proj3.style.boxShadow = '0 10px 20px var(--mid), 0 6px 6px var(--mid)';
+    proj3.style.boxShadow = '0 10px 20px var(--lighter), 0 6px 6px var(--mid)';
   }
   else {
     proj1.style.boxShadow = '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)';
