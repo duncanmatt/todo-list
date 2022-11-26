@@ -17,24 +17,21 @@
           <p id="proj1-info">
             This web page will act as my resume and storage for my best projects.
           </p>
-          <ul class="task-list" id="proj1-list"></ul>
       </div>
       <div class="proj" id="proj2">
         <h3>FF Lineup Tool</h3>
           <p>
             An app that picks the best set of players for a given with greedy algorithm
           </p>
-          <ul class="task-list" id="proj2-list"></ul>
       </div>
       <div class="proj" id="proj3">
         <h3>Tic Tac Toe</h3>
           <p>
             The classic game played against a bot.
           </p>
-          <ul class="task-list" id="proj3-list"></ul>
       </div>
     </section>
-    <section id="new-task">
+    <section id="tasks">
       <form id="task-form">
           <legend>Select a project to add task</legend>
           <span>
@@ -46,14 +43,17 @@
           <label for="ttt-select"></label>
           </span>
         <br>
-        <label for="name"></label>
-        <input type="text" id="task-title-input" name="name" placeholder="task">
-        <label for="info"></label>
-        <input type="text" id="task-info-input" name="info" placeholder="info">
-        <input type="image" id="new-task-btn" alt="Add" 
+        <div id="task-controls">
+          <label for="name"></label>
+          <input type="text" id="task-title-input" name="name" placeholder="task">
+          <label for="info"></label>
+          <input type="text" id="task-info-input" name="info" placeholder="info">
+          <input type="image" id="new-task-btn" alt="Add" 
           src="/assets/5402348_add_list_playlist_checklist_media_icon (1).png">
-        </input>
+          </input>
+        </div>
       </form>
+      <ul class="task-list"></ul>
     </section>
   </div>
   <script src="main.js"></script>

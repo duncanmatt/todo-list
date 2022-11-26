@@ -31,7 +31,6 @@ body {
 #greeting {
   color: var(--dark);
   padding: 1rem;
-
 }
 
 #projects {
@@ -64,6 +63,46 @@ body {
   padding-left: 50px;
 }
 
+#tasks {
+  min-width: 50%;
+}
+ 
+#task-form {
+  background-color: rgba(47,47,42,0.25);
+  border-radius: 6px;
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-columns: 1fr;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+#task-form > legend {
+  text-align: center;
+  margin: 0;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+#task-form > span {
+  margin: 0 3rem 0 3rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+#task-form > input[type=text] {
+  padding: 0.25rem;
+  margin: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border: none;
+  border-radius: 8px;
+ 
+}
+
+#task-form > input[type=image] {
+  margin-right: 1rem;
+  place-self: flex-end;
+}
+
 .task-list {
   padding: 0;
   list-style-type: none;
@@ -90,53 +129,7 @@ body {
   border-bottom: 1px solid var(--shade);
 }
 
-.item > h4 {
-  margin: 0;
-}
 
-.item > p {
-  margin: 0;
-}
 
-#task-form {
-  background-color: rgba(47,47,42,0.25);
-  border-radius: 6px;
-  display: grid;
-  grid-auto-flow: row;
-  grid-auto-columns: 1fr;
-  justify-content: center;
-  margin-bottom: 1rem;
-  
-}
-
-#task-form > legend {
-  text-align: center;
-  margin: 0;
-  padding: 0.5rem;
-  font-weight: bold;
-}
-
-#task-form > span {
-  margin: 0 3rem 0 3rem;
-  display: flex;
-  justify-content: space-around;
-}
-
-#task-form > input[type=text] {
-  padding: 0.25rem;
-  margin: 0.25rem 0.5rem 0.25rem 0.5rem;
-  border: none;
-  border-radius: 8px;
- 
-}
-
-#task-form > button {
-  margin: 1rem 4rem 1rem 4rem;
-}
-
-#task-form > input[type=image] {
-  margin-right: 1rem;
-  place-self: flex-end;
-}
 
 

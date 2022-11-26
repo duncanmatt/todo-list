@@ -1,64 +1,64 @@
 import _ from "lodash";
 import "./styles.css";
 
-// date at the top
-const greeting = document.getElementById('greeting');
-
-// UL for each project to append new task li
-const proj1List = document.getElementById('proj1-list');
-const proj2List = document.getElementById('proj2-list');
-const proj3List = document.getElementById('proj3-list');
-
-// project cards
-const proj1 = document.getElementById('proj1');
-const proj2 = document.getElementById('proj2');
-const proj3 = document.getElementById('proj3');
-
 class Task {
-  constructor(title, info, listNum) {
+  constructor(title, info) {
     this.title = title;
     this.info = info;
-    this.listNum = listNum;
   }
   // store()
 }
-let taskItems = [];
+
 window.addEventListener('load', () => {
-  const taskForm = document.getElementById('task-form');
+  createTaskItems();
+});
+
+const taskForm = document.getElementById('task-form');
+taskForm.onsubmit = (e) => {
+  e.preventDefault();
+  addTask();
+}
+
+function addTask() {
   const taskTitle = document.getElementById('task-title-input');
   const taskInfo = document.getElementById('task-info-input');
-  taskItems = JSON.parse(localStorage.getItem('taskItems')) || [];
+  let newTask = new Task(taskTitle.value, taskInfo.value);
 
-  taskForm.onsubmit = (e) => {
-    e.preventDefault();
-    if (document.getElementById('pw-select').checked) {
-      let newTask = new Task(taskTitle.value, taskInfo.value, 1);
-      localStorage.setItem(`${taskTitle.value}`, JSON.stringify(newTask));
-      taskItems.push(newTask);
-      taskForm.reset();
-    } 
-    else if(document.getElementById('ff-select').checked) {
-      let newTask = new Task(taskTitle.value, taskInfo.value, 2);
-      localStorage.setItem(`${taskTitle.value}`, JSON.stringify(newTask));
-      taskItems.push(newTask);
-      taskForm.reset();
-    }
-    else if(document.getElementById('ttt-select').checked) {
-      let newTask = new Task(taskTitle.value, taskInfo.value, 3);
-      localStorage.setItem(`${taskTitle.value}`, JSON.stringify(newTask));
-      taskItems.push(newTask);
-      taskForm.reset();
-    } else {
-      formFeedback();
-      console.log('TASK DID NOT SUBMIT');
-    }
-    console.log(taskItems);
+  if (document.getElementById('pw-select').checked) {
+    localStorage.setItem(newTask.title, JSON.stringify(newTask.info));
+    taskForm.reset();
+  } 
+  else if(document.getElementById('ff-select').checked) {
+    localStorage.setItem(newTask.title, JSON.stringify(newTask.info));
+    taskForm.reset();
   }
-});
-// --DOM--
+  else if(document.getElementById('ttt-select').checked) {
+    localStorage.setItem(newTask.title, JSON.stringify(newTask.info));
+    taskForm.reset();
+  } else {
+    formFeedback();
+    console.log('TASK DID NOT SUBMIT');
+  }
+}
 
+function createTaskItems() {
+  const taskList = document.querySelector('.task-list');
+  for (let i = 0; i < localStorage.length; i++) {
+    let taskKey = localStorage.key(i);
+    let taskContent = JSON.parse(
+      localStorage.getItem(taskKey));
+    let newItem = document.createElement('li');
+    newItem.innerHTML = `
+                          <h4>${taskKey}</h4>
+                          <h6>${taskContent}</h6>
+                        `;
+    newItem.classList.add('item');
+    taskList.appendChild(newItem);
+  }
+}
 
 function getDate() {
+  const greeting = document.getElementById('greeting');
   let today = new Date();
   let day = String(today.getDate()).padStart(2, '0');
   let month = String(today.getMonth() + 1).padStart(2, '0');
