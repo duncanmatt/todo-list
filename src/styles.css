@@ -4,6 +4,7 @@
   --light: rgba(71, 181, 255, 99%);
   --lighter: rgba(223, 246, 255, 99%);
   --shade: #e3e5e4;
+  --illuminate: #f7f7f2;
 }
 
 * {
@@ -56,7 +57,6 @@ body {
 .proj > p {
   max-width: fit-content;
   text-align: center;
-  font-size: 1.25rem;
 }
 
 .addbutton {
@@ -64,43 +64,61 @@ body {
 }
 
 #tasks {
-  min-width: 50%;
+ padding-block: 1rem;
+ min-width: 55vw;
+ box-shadow: 0 0 33px var(--shade), 0 0 6px var(--mid);
+ border-radius: 4px;
+ margin-bottom: 2rem;
 }
  
 #task-form {
-  background-color: rgba(47,47,42,0.25);
+  background-color: var(--lighter);
   border-radius: 6px;
   display: grid;
-  grid-auto-flow: row;
-  grid-auto-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: 75% 25%;
+  grid-template-areas: 
+  'formHeader formHeader'
+  'taskSelectors taskSelectors'
+  'titleInput addTask'
+  'infoInput addTask';
   justify-content: center;
-  margin-bottom: 1rem;
+  margin: 0 1rem 1rem 1rem;
+  gap: 3px;
 }
 
 #task-form > legend {
   text-align: center;
-  margin: 0;
-  padding: 0.5rem;
+  margin-top: 1rem;
   font-weight: bold;
+  grid-area: formHeader;
 }
 
 #task-form > span {
   margin: 0 3rem 0 3rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  grid-area: taskSelectors;
 }
 
 #task-form > input[type=text] {
-  padding: 0.25rem;
-  margin: 0.25rem 0.5rem 0.25rem 0.5rem;
+  margin-left: 1rem;
   border: none;
   border-radius: 8px;
  
 }
 
-#task-form > input[type=image] {
-  margin-right: 1rem;
-  place-self: flex-end;
+#task-title-input {
+  grid-area: titleInput;
+ 
+}
+
+#task-info-input {
+  grid-area: infoInput;
+}
+
+#new-task-btn {
+  grid-area: addTask;
 }
 
 .task-list {
@@ -109,12 +127,13 @@ body {
 }
 
 .task-list li {
-  border: 1px solid var(--shade);
+  margin-left: 2rem;
+  margin-right: 2rem;
   border-radius: 8px;
-  background-color: var(--light);
   display: flex;
   flex-direction: column;
   flex: 1;
+  filter: drop-shadow(0 0 0.1rem var());
 }
 
 .task-list > li > span {
@@ -126,7 +145,19 @@ body {
 }
 
 .task-list li:not(:last-of-type) {
-  border-bottom: 1px solid var(--shade);
+  margin-bottom: 1rem;
+}
+
+.item > h4 {
+  margin: 0;
+  padding: 0 0 0 1rem;
+  background-color: var(--illuminate);
+}
+
+.item > h6 {
+  margin: 0;
+  text-align: center;
+  background-color: var(--shade);
 }
 
 
