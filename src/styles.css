@@ -64,7 +64,7 @@ body {
 
 #tasks {
  padding-block: 1rem;
- min-width: 55vw;
+ min-width: 50vw;
  box-shadow: 0 10px 20px rgba(51, 51, 51, 0.1), 0 6px 6px var(--shade);
  border-radius: 4px;
  margin-bottom: 2rem;
@@ -78,8 +78,8 @@ body {
   grid-template-areas: 
   'formHeader formHeader'
   'taskSelectors taskSelectors'
-  'titleInput addTask'
-  'infoInput addTask';
+  'key-input addTask'
+  'val-input addTask';
   justify-content: center;
   margin: 0 1rem 1rem 1rem;
   gap: 3px;
@@ -106,13 +106,13 @@ body {
  
 }
 
-#task-title-input {
-  grid-area: titleInput;
+#task-key-input {
+  grid-area: key-input;
  
 }
 
-#task-info-input {
-  grid-area: infoInput;
+#task-val-input {
+  grid-area: val-input;
 }
 
 #new-task-btn {
@@ -122,45 +122,57 @@ body {
 .task-list {
   padding: 0;
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /*item structure*/
-.task-list li {
-  margin-left: 2rem;
-  margin-right: 2rem;
+li.item {
+  
   display: flex;
   flex-direction: column;
   flex: 1;
-}
-
-.task-list > li > span {
-  margin-left: 0.5rem;
-}
-
-.task-list > li > i {
-  margin: 0.25rem;
 }
 
 .task-list li:not(:last-of-type) {
   margin-bottom: 1rem;
 }
 
-/*item styling*/
-.item {
-  border-radius: 32px;
+.wrapper {
+  width: 200px;
+  border-radius: 20px;
 }
 
-.item > h4 {
+/*item styling*/
+
+
+.item-top {
   margin: 0;
   padding: 0 0 0 1rem;
   background-color: var(--mid);
+  display: flex;
+  align-items: center;
 }
 
-.item > h6 {
+.item-top {
+  margin: 0;
+}
+
+.del {
+  padding-right: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.item-bottom {
   margin: 0;
   text-align: center;
   background-color: var(--lighter);
 }
 
+.item-bottom > h6 {
+  margin: 0;
+}
 
 
 
