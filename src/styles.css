@@ -100,7 +100,7 @@ body {
 }
 
 #task-form > input[type=text] {
-  margin-left: 1rem;
+  margin-left: 1.5rem;
   border: none;
   border-radius: 8px;
  
@@ -134,45 +134,45 @@ li.item {
   flex: 1;
 }
 
-.task-list li:not(:last-of-type) {
+.wrapper {
+  background-color: var(--lighter);
+  min-width: 200px;
+  border-radius: 24px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 50px;
+  grid-template-areas: 'task-title task-delete'
+                        'task-info task-info';
+}
+
+.task-list .wrapper:not(:last-of-type) {
   margin-bottom: 1rem;
 }
 
-.wrapper {
-  width: 200px;
-  border-radius: 20px;
+.wrapper > h4 {
+  align-content: center;
+  margin-left: 1rem;
+  grid-area: task-title;
 }
 
-/*item styling*/
-
-
-.item-top {
-  margin: 0;
-  padding: 0 0 0 1rem;
+.wrapper > h6 {
+  grid-area: task-info;
   background-color: var(--mid);
-  display: flex;
-  align-items: center;
-}
-
-.item-top {
+  text-align: center;
   margin: 0;
+  padding-top: 1rem;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
 }
 
 .del {
-  padding-right: 0.5rem;
+  grid-area: task-delete;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-self: center;
+ 
 }
 
-.item-bottom {
-  margin: 0;
-  text-align: center;
-  background-color: var(--lighter);
-}
-
-.item-bottom > h6 {
-  margin: 0;
-}
 
 
 

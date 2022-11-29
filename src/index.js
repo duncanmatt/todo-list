@@ -75,16 +75,16 @@ let taskStorage = new TaskTable();
 window.addEventListener('load', () => {
   updateStorage();
   createTaskItems();
+  removeTask();  
 });
+
 // push every key and value from local storage into datastruct
 function updateStorage() {
   for (const [key, value] of Object.entries(localStorage)) {
     taskStorage.set(`${key}`, JSON.parse(value));
   }
   console.log(taskStorage);
-  
 }
-
 
 // adding tasks to localstorage
 const taskForm = document.getElementById('task-form');
@@ -92,6 +92,8 @@ taskForm.onsubmit = (e) => {
   e.preventDefault();
   addTask();
 }
+
+
 
 function addTask() {
   const taskKey = document.getElementById('task-key-input');
@@ -120,16 +122,14 @@ function addTask() {
 function createItem(key, val) {
   const taskList = document.querySelector('.task-list');
   const newItem = document.createElement('li');
-    newItem.innerHTML = `<div class="wrapper">
-                          <div class="item-top">
+    newItem.innerHTML = `
+                          <div class="wrapper">
                             <h4>${key}</h4>
-                            <span class="del">
-                              <i class="fa-solid fa-trash"></i>
-                            </span>
-                          </div>
-                          <div class="item-bottom">
+                            <div role="button" class="del">
+                              <i class="fa-solid fa-trash"
+                              class="del-btn"></i>
+                            </div>
                             <h6>${val}</h6>
-                          </div>
                         </div>
                         `;
     newItem.classList.add('item');
@@ -142,24 +142,30 @@ function createTaskItems() {
   let storage = taskStorage.keys();
   for (const key of storage) {
     const newTask = new Task(key, taskStorage.get(key));
-    const newItem = document.createElement('li');
-    newItem.innerHTML = `<div class="wrapper">
-                          <div class="item-top">
-                            <h4>${newTask.key}</h4>
-                            <span class="del">
-                              <i class="fa-solid fa-trash"></i>
-                            </span>
-                          </div>
-                          <div class="item-bottom">
+    const newWrapper = document.createElement('div');
+    newWrapper.innerHTML = `<h4>${newTask.key}</h4>
+                              <div role="button" class="del">
+                               <i class="fa-solid fa-trash"></i>
+                              </div>
                             <h6>${newTask.val}</h6>
-                          </div>
-                        </div>
+                            
                         `;
-    newItem.classList.add('item');
-    taskList.appendChild(newItem); 
+    newWrapper.classList.add('wrapper');
+    taskList.appendChild(newWrapper); 
   }
-}    
+}
 
+// click on trash can to remove corresponding task
+function removeTask() {
+  const taskList = document.querySelector('.task-list');
+  let trashCans = document.querySelectorAll('.del');
+  trashCans.forEach((can) => {
+    can.addEventListener('click', () => {
+      taskList.removeChild(can.parentElement);
+    });
+  });
+}
+  
 // display the current date at the top 
 function getDate() {
   const greeting = document.getElementById('greeting');
@@ -202,9 +208,6 @@ projSelectors.forEach((selector) => {
     formFeedback();
   });
 });
-
-// click to remove task
-
 
 
 
