@@ -20,8 +20,8 @@ class TaskTable {
     let WEIRD_PRIME = 31;
     for (let i = 0; i < Math.min(key.length, 100); i++) {
       let char = key[i];
-      let value = char.charCodeAt(0) + 96;
-      total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+      let value = char.charCodeAt(0) - 96;
+      total = (WEIRD_PRIME + value) % this.keyMap.length;
     }
     return total;
   }
@@ -93,8 +93,6 @@ taskForm.onsubmit = (e) => {
   addTask();
 }
 
-
-
 function addTask() {
   const taskKey = document.getElementById('task-key-input');
   const taskVal = document.getElementById('task-val-input');
@@ -121,19 +119,16 @@ function addTask() {
 }
 function createItem(key, val) {
   const taskList = document.querySelector('.task-list');
-  const newItem = document.createElement('li');
-    newItem.innerHTML = `
-                          <div class="wrapper">
+  const newWrapper = document.createElement('li');
+    newWrapper.innerHTML = `
                             <h4>${key}</h4>
                             <div role="button" class="del">
-                              <i class="fa-solid fa-trash"
-                              class="del-btn"></i>
+                             <i class="fa-solid fa-trash"class="del-btn"></i>
                             </div>
                             <h6>${val}</h6>
-                        </div>
                         `;
-    newItem.classList.add('item');
-    taskList.appendChild(newItem); 
+    newWrapper.classList.add('wrapper');
+    taskList.append(newWrapper); 
 }
 
 // create ui items from storage list
@@ -148,10 +143,10 @@ function createTaskItems() {
                                <i class="fa-solid fa-trash"></i>
                               </div>
                             <h6>${newTask.val}</h6>
-                            
                         `;
     newWrapper.classList.add('wrapper');
-    taskList.appendChild(newWrapper); 
+    taskList.append(newWrapper);
+    console.log(storage); 
   }
 }
 
@@ -162,6 +157,8 @@ function removeTask() {
   trashCans.forEach((can) => {
     can.addEventListener('click', () => {
       taskList.removeChild(can.parentElement);
+      let deletedKey = can.previousSibling.previousSibling.textContent;
+      localStorage.removeItem(deletedKey);
     });
   });
 }

@@ -143,10 +143,11 @@ li.item {
   grid-template-columns: 1fr 50px;
   grid-template-areas: 'task-title task-delete'
                         'task-info task-info';
+  margin-bottom: 1rem;
 }
 
 .task-list .wrapper:not(:last-of-type) {
-  margin-bottom: 1rem;
+  
 }
 
 .wrapper > h4 {
